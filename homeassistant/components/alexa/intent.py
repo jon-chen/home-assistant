@@ -191,7 +191,8 @@ def resolve_slot_synonyms(key, request):
             if entry["status"]["code"] != SYN_RESOLUTION_MATCH:
                 continue
 
-            possible_values.extend([item["value"]["name"] for item in entry["values"]])
+            #possible_values.extend([item["value"]["name"] for item in entry["values"]])
+            possible_values.extend([item["value"] for item in entry["values"]])
 
         # If there is only one match use the resolved value, otherwise the
         # resolution cannot be determined, so use the spoken slot value
@@ -229,7 +230,13 @@ class AlexaResponse:
 
                 _key = key.replace(".", "_")
 
-                self.variables[_key] = resolve_slot_synonyms(key, value)
+                #self.variables[_key] = resolve_slot_synonyms(key, value)
+                _value = resolve_slot_synonyms(key, value)
+                if type(_value) is dict:
+                  self.variables[_key + '_id'] = _value['id']
+                  self.variables[_key] = _value['name']
+                else:
+                  self.variables[_key] = _value
 
     def add_card(self, card_type, title, content):
         """Add a card to the response."""
