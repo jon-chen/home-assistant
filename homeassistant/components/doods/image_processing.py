@@ -15,11 +15,11 @@ from homeassistant.components.image_processing import (
     CONF_SOURCE,
     PLATFORM_SCHEMA,
     ImageProcessingEntity,
-    draw_box,
 )
 from homeassistant.core import split_entity_id
 from homeassistant.helpers import template
 import homeassistant.helpers.config_validation as cv
+from homeassistant.util.pil import draw_box
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -177,6 +177,7 @@ class Doods(ImageProcessingEntity):
                     _LOGGER.warning("Detector does not support label %s", label)
                     continue
                 self._label_areas[label] = [0, 0, 1, 1]
+                self._label_covers[label] = True
                 if label not in dconfig or dconfig[label] > confidence:
                     dconfig[label] = confidence
 
