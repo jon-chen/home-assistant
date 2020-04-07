@@ -1,4 +1,4 @@
-"""Hass representation of an UPnP/IGD."""
+"""Home Assistant representation of an UPnP/IGD."""
 import asyncio
 from ipaddress import IPv4Address
 
@@ -14,16 +14,16 @@ from .const import CONF_LOCAL_IP, DOMAIN, LOGGER as _LOGGER
 
 
 class Device:
-    """Hass representation of an UPnP/IGD."""
+    """Home Assistant representation of an UPnP/IGD."""
 
     def __init__(self, igd_device):
-        """Initializer."""
+        """Initialize UPnP/IGD device."""
         self._igd_device = igd_device
         self._mapped_ports = []
 
     @classmethod
     async def async_discover(cls, hass: HomeAssistantType):
-        """Discovery UPNP/IGD devices."""
+        """Discover UPnP/IGD devices."""
         _LOGGER.debug("Discovering UPnP/IGD devices")
         local_ip = None
         if DOMAIN in hass.data and "config" in hass.data[DOMAIN]:
@@ -142,16 +142,28 @@ class Device:
 
     async def async_get_total_bytes_received(self):
         """Get total bytes received."""
-        return await self._igd_device.async_get_total_bytes_received()
+        try:
+            return await self._igd_device.async_get_total_bytes_received()
+        except asyncio.TimeoutError:
+            _LOGGER.warning("Timeout during get_total_bytes_received")
 
     async def async_get_total_bytes_sent(self):
         """Get total bytes sent."""
-        return await self._igd_device.async_get_total_bytes_sent()
+        try:
+            return await self._igd_device.async_get_total_bytes_sent()
+        except asyncio.TimeoutError:
+            _LOGGER.warning("Timeout during get_total_bytes_sent")
 
     async def async_get_total_packets_received(self):
         """Get total packets received."""
-        return await self._igd_device.async_get_total_packets_received()
+        try:
+            return await self._igd_device.async_get_total_packets_received()
+        except asyncio.TimeoutError:
+            _LOGGER.warning("Timeout during get_total_packets_received")
 
     async def async_get_total_packets_sent(self):
         """Get total packets sent."""
-        return await self._igd_device.async_get_total_packets_sent()
+        try:
+            return await self._igd_device.async_get_total_packets_sent()
+        except asyncio.TimeoutError:
+            _LOGGER.warning("Timeout during get_total_packets_sent")

@@ -1,8 +1,9 @@
 """Reads vehicle status from StarLine API."""
 from homeassistant.components.sensor import DEVICE_CLASS_TEMPERATURE
-from homeassistant.const import TEMP_CELSIUS
+from homeassistant.const import TEMP_CELSIUS, UNIT_PERCENTAGE
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.icon import icon_for_battery_level, icon_for_signal_level
+
 from .account import StarlineAccount, StarlineDevice
 from .const import DOMAIN
 from .entity import StarlineEntity
@@ -12,7 +13,7 @@ SENSOR_TYPES = {
     "balance": ["Balance", None, None, "mdi:cash-multiple"],
     "ctemp": ["Interior Temperature", DEVICE_CLASS_TEMPERATURE, TEMP_CELSIUS, None],
     "etemp": ["Engine Temperature", DEVICE_CLASS_TEMPERATURE, TEMP_CELSIUS, None],
-    "gsm_lvl": ["GSM Signal", None, "%", None],
+    "gsm_lvl": ["GSM Signal", None, UNIT_PERCENTAGE, None],
 }
 
 
@@ -41,7 +42,7 @@ class StarlineSensor(StarlineEntity, Entity):
         unit: str,
         icon: str,
     ):
-        """Constructor."""
+        """Initialize StarLine sensor."""
         super().__init__(account, device, key, name)
         self._device_class = device_class
         self._unit = unit

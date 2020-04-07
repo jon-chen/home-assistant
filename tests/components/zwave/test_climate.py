@@ -2,13 +2,15 @@
 import pytest
 
 from homeassistant.components.climate.const import (
-    CURRENT_HVAC_HEAT,
+    ATTR_TARGET_TEMP_HIGH,
+    ATTR_TARGET_TEMP_LOW,
     CURRENT_HVAC_COOL,
-    HVAC_MODES,
+    CURRENT_HVAC_HEAT,
     HVAC_MODE_COOL,
     HVAC_MODE_HEAT,
     HVAC_MODE_HEAT_COOL,
     HVAC_MODE_OFF,
+    HVAC_MODES,
     PRESET_AWAY,
     PRESET_BOOST,
     PRESET_ECO,
@@ -19,8 +21,6 @@ from homeassistant.components.climate.const import (
     SUPPORT_SWING_MODE,
     SUPPORT_TARGET_TEMPERATURE,
     SUPPORT_TARGET_TEMPERATURE_RANGE,
-    ATTR_TARGET_TEMP_LOW,
-    ATTR_TARGET_TEMP_HIGH,
 )
 from homeassistant.components.zwave import climate, const
 from homeassistant.components.zwave.climate import (
@@ -342,7 +342,7 @@ def test_get_device_detects_single_setpoint_device(device_single_setpoint):
 
 
 def test_default_hvac_modes():
-    """Test wether all hvac modes are included in default_hvac_modes."""
+    """Test whether all hvac modes are included in default_hvac_modes."""
     for hvac_mode in HVAC_MODES:
         assert hvac_mode in DEFAULT_HVAC_MODES
 

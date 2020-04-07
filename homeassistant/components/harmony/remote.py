@@ -111,9 +111,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         activity,
     )
 
-    harmony_conf_file = hass.config.path(
-        "{}{}{}".format("harmony_", slugify(name), ".conf")
-    )
+    harmony_conf_file = hass.config.path(f"harmony_{slugify(name)}.conf")
     try:
         device = HarmonyRemote(
             name, address, port, activity, harmony_conf_file, delay_secs
@@ -369,7 +367,7 @@ class HarmonyRemote(remote.RemoteDevice):
 
         for result in result_list:
             _LOGGER.error(
-                "Sending command %s to device %s failed with code " "%s: %s",
+                "Sending command %s to device %s failed with code %s: %s",
                 result.command.command,
                 result.command.device,
                 result.code,
@@ -397,7 +395,7 @@ class HarmonyRemote(remote.RemoteDevice):
     def write_config_file(self):
         """Write Harmony configuration file."""
         _LOGGER.debug(
-            "%s: Writing hub config to file: %s", self.name, self._config_path
+            "%s: Writing hub configuration to file: %s", self.name, self._config_path
         )
         if self._client.config is None:
             _LOGGER.warning("%s: No configuration received from hub", self.name)
