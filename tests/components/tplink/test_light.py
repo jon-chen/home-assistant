@@ -26,20 +26,19 @@ from homeassistant.const import (
 from homeassistant.core import HomeAssistant
 from homeassistant.setup import async_setup_component
 
-LightMockData = NamedTuple(
-    "LightMockData",
-    (
-        ("sys_info", dict),
-        ("light_state", dict),
-        ("set_light_state", Callable[[dict], None]),
-        ("set_light_state_mock", Mock),
-        ("get_light_state_mock", Mock),
-        ("current_consumption_mock", Mock),
-        ("get_sysinfo_mock", Mock),
-        ("get_emeter_daily_mock", Mock),
-        ("get_emeter_monthly_mock", Mock),
-    ),
-)
+
+class LightMockData(NamedTuple):
+    """Mock light data."""
+
+    sys_info: dict
+    light_state: dict
+    set_light_state: Callable[[dict], None]
+    set_light_state_mock: Mock
+    get_light_state_mock: Mock
+    current_consumption_mock: Mock
+    get_sysinfo_mock: Mock
+    get_emeter_daily_mock: Mock
+    get_emeter_monthly_mock: Mock
 
 
 @pytest.fixture(name="light_mock_data")
@@ -86,6 +85,7 @@ def light_mock_data_fixture() -> None:
 
         light_state.update(state)
         light_state["dft_on_state"] = drt_on_state
+        return light_state
 
     set_light_state_patch = patch(
         "homeassistant.components.tplink.common.SmartBulb.set_light_state",
@@ -311,7 +311,7 @@ async def test_get_light_state_retry(
         if set_state_call_count == 1:
             raise SmartDeviceException()
 
-        light_mock_data.set_light_state(state_data)
+        return light_mock_data.set_light_state(state_data)
 
     light_mock_data.set_light_state_mock.side_effect = set_light_state_side_effect
 
