@@ -35,7 +35,7 @@ Adafruit-SHT31==1.0.2
 # Adafruit_BBIO==1.1.1
 
 # homeassistant.components.homekit
-HAP-python==2.8.1
+HAP-python==2.8.2
 
 # homeassistant.components.mastodon
 Mastodon.py==1.5.0
@@ -208,7 +208,7 @@ aiopvpc==1.0.2
 aiopylgtv==0.3.3
 
 # homeassistant.components.switcher_kis
-aioswitcher==2019.4.26
+aioswitcher==1.1.0
 
 # homeassistant.components.unifi
 aiounifi==15
@@ -355,7 +355,7 @@ boto3==1.9.252
 bravia-tv==1.0.1
 
 # homeassistant.components.broadlink
-broadlink==0.13.0
+broadlink==0.13.1
 
 # homeassistant.components.brother
 brother==0.1.11
@@ -704,7 +704,7 @@ hole==0.5.1
 holidays==0.10.1
 
 # homeassistant.components.frontend
-home-assistant-frontend==20200407.1
+home-assistant-frontend==20200407.2
 
 # homeassistant.components.zwave
 homeassistant-pyozw==0.1.10
@@ -922,7 +922,7 @@ netdisco==2.6.0
 neurio==0.3.1
 
 # homeassistant.components.nexia
-nexia==0.8.0
+nexia==0.9.1
 
 # homeassistant.components.nextcloud
 nextcloudmonitor==1.1.0
@@ -1218,7 +1218,7 @@ pycsspeechtts==1.0.3
 # pycups==1.9.73
 
 # homeassistant.components.daikin
-pydaikin==1.6.2
+pydaikin==1.6.3
 
 # homeassistant.components.danfoss_air
 pydanfossair==0.1.0
@@ -1330,13 +1330,13 @@ pyialarm==0.3
 pyicloud==0.9.6.1
 
 # homeassistant.components.intesishome
-pyintesishome==1.7.1
+pyintesishome==1.7.3
 
 # homeassistant.components.ipma
 pyipma==2.0.5
 
 # homeassistant.components.ipp
-pyipp==0.9.1
+pyipp==0.10.1
 
 # homeassistant.components.iqvia
 pyiqvia==0.2.1
@@ -1738,7 +1738,7 @@ pyversasense==0.0.6
 pyvesync==1.1.0
 
 # homeassistant.components.vizio
-pyvizio==0.1.44
+pyvizio==0.1.46
 
 # homeassistant.components.velux
 pyvlx==0.2.12
